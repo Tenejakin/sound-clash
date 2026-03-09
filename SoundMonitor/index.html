@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Clash | LED Controller</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="glass-container">
+        <header>
+            <h1>Sound <span class="accent">Monitor</span></h1>
+            <p>Real-time Decibel Sync for Wemos</p>
+        </header>
+
+        <section class="controls">
+            <div class="input-group">
+                <label for="wemos-ip">Wemos IP Address</label>
+                <div class="flex-row">
+                    <input type="text" id="wemos-ip" placeholder="192.168.1.XXX" value="192.168.1.100">
+                    <button id="connect-btn">Connect</button>
+                </div>
+            </div>
+
+            <div class="thresholds">
+                <div class="input-group">
+                    <label for="min-db">Min (0 LEDs)</label>
+                    <input type="number" id="min-db" value="45">
+                </div>
+                <div class="input-group">
+                    <label for="max-db">Max (Full)</label>
+                    <input type="number" id="max-db" value="120">
+                </div>
+            </div>
+
+            <div class="status" id="status">Disconnected</div>
+        </section>
+
+        <section class="visualizer">
+            <div class="db-display">
+                <span id="db-value">--</span>
+                <span class="unit">dB</span>
+            </div>
+            <div class="led-preview">
+                <div id="led-bar" class="led-bar">
+                    <!-- 17 LED segments will be generated here -->
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <button id="start-audio" class="main-btn">Start Microphone</button>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
