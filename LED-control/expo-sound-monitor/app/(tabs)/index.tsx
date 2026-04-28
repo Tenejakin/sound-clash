@@ -13,9 +13,11 @@ export default function SoundClashApp() {
   const [connected, setConnected] = useState(false);
   const [monitoring, setMonitoring] = useState(false);
   const [ledLevel, setLedLevel] = useState(0);
+  const [team, setTeam] = useState<'red' | 'blue'>('red');
 
   const socketRef = useRef(null);
   const recordingRef = useRef(null);
+  const teamRef = useRef<'red' | 'blue'>('red');
 
   useEffect(() => {
     return () => {
@@ -68,7 +70,7 @@ export default function SoundClashApp() {
     setLedLevel(level);
 
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(level.toString());
+      socketRef.current.send(`${teamRef.current}:${level}`);
     }
   };
 
@@ -158,6 +160,24 @@ export default function SoundClashApp() {
         </View>
 
         <View style={styles.card}>
+          <Text style={styles.label}>Team</Text>
+          <View style={styles.teamRow}>
+            <TouchableOpacity
+              style={[styles.teamBtn, styles.teamBtnRed, team === 'red' && styles.teamBtnRedActive]}
+              onPress={() => { setTeam('red'); teamRef.current = 'red'; }}
+            >
+              <Text style={[styles.teamBtnText, team === 'red' && styles.teamBtnTextActive]}>RED</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.teamBtn, styles.teamBtnBlue, team === 'blue' && styles.teamBtnBlueActive]}
+              onPress={() => { setTeam('blue'); teamRef.current = 'blue'; }}
+            >
+              <Text style={[styles.teamBtnText, team === 'blue' && styles.teamBtnTextActive]}>BLUE</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.card}>
           <View style={styles.thresholdRow}>
             <View style={styles.inputGroupSmall}>
               <Text style={styles.label}>Min (0 LEDs)</Text>
@@ -192,7 +212,7 @@ export default function SoundClashApp() {
                 key={i}
                 style={[
                   styles.ledSegment,
-                  i < ledLevel && (i < 8 ? styles.ledLow : i < 13 ? styles.ledMid : styles.ledHigh)
+                  i < ledLevel && (team === 'red' ? styles.ledTeamRed : styles.ledTeamBlue)
                 ]}
               />
             ))}
@@ -341,6 +361,41 @@ const styles = StyleSheet.create({
   ledLow: { backgroundColor: '#22c55e', shadowColor: '#22c55e', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.8, shadowRadius: 10, elevation: 10 },
   ledMid: { backgroundColor: '#eab308', shadowColor: '#eab308', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.8, shadowRadius: 10, elevation: 10 },
   ledHigh: { backgroundColor: '#ef4444', shadowColor: '#ef4444', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.8, shadowRadius: 10, elevation: 10 },
+  ledTeamRed: { backgroundColor: '#ef4444', shadowColor: '#ef4444', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.8, shadowRadius: 10, elevation: 10 },
+  ledTeamBlue: { backgroundColor: '#3b82f6', shadowColor: '#3b82f6', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.8, shadowRadius: 10, elevation: 10 },
+  teamRow: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 8,
+  },
+  teamBtn: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'transparent',
+    backgroundColor: 'rgba(15, 23, 42, 0.5)',
+  },
+  teamBtnRed: {},
+  teamBtnBlue: {},
+  teamBtnRedActive: {
+    backgroundColor: '#ef4444',
+    borderColor: '#fca5a5',
+  },
+  teamBtnBlueActive: {
+    backgroundColor: '#3b82f6',
+    borderColor: '#93c5fd',
+  },
+  teamBtnText: {
+    color: '#94a3b8',
+    fontSize: 16,
+    fontWeight: '800',
+    letterSpacing: 2,
+  },
+  teamBtnTextActive: {
+    color: '#fff',
+  },
   mainBtn: {
     backgroundColor: '#38bdf8',
     borderRadius: 20,

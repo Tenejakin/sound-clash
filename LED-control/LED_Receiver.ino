@@ -155,7 +155,7 @@ const char INDEX_HTML[] PROGMEM = R"=====(
 </html>
 )=====";
 
-void updateLEDs(int level);
+void updateLEDs(int level, CRGB color);
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length);
 
 void handleRoot() {
@@ -168,22 +168,31 @@ void handleNotFound() {
   server.send(302, "text/plain", "");
 }
 
-void updateLEDs(int level) {
+void updateLEDs(int level, CRGB color) {
   if (level > NUM_LEDS) level = NUM_LEDS;
   if (level < 0) level = 0;
   FastLED.clear();
   for(int i = 0; i < level; i++) {
-    if (i < 8) leds[i] = CRGB::Green;
-    else if (i < 13) leds[i] = CRGB::Yellow;
-    else leds[i] = CRGB::Red;
+    leds[i] = color;
   }
   FastLED.show();
 }
 
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
   if(type == WStype_TEXT) {
-    int level = String((char*)payload).toInt();
-    updateLEDs(level);
+    String msg = String((char*)payload);
+    int colon = msg.indexOf(':');
+    CRGB color = CRGB::Red;
+    int level = 0;
+    if (colon > 0) {
+      String team = msg.substring(0, colon);
+      level = msg.substring(colon + 1).toInt();
+      if (team == "blue") color = CRGB::Blue;
+      else color = CRGB::Red;
+    } else {
+      level = msg.toInt();
+    }
+    updateLEDs(level, color);
   }
 }
 
