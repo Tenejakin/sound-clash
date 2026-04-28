@@ -19,6 +19,10 @@ export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  // Disable caching — leaderboard data must be fresh every poll
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+  res.setHeader('CDN-Cache-Control', 'no-store');
+  res.setHeader('Vercel-CDN-Cache-Control', 'no-store');
 
   if (req.method === 'OPTIONS') {
     return res.status(204).end();
@@ -39,7 +43,7 @@ export default async function handler(req, res) {
 
   try {
     const result = await pool.query(
-      `SELECT id, team, scream_time_ms, peak_scream_db, final_score, created_at
+      `SELECT id, team, nickname, scream_time_ms, peak_scream_db, final_score, created_at
        FROM scream_sessions
        ORDER BY created_at DESC
        LIMIT 100`

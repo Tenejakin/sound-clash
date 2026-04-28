@@ -5,13 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sound Clash — Live Leaderboard</title>
   <style>
+    @font-face {
+      font-family: 'FuturaRedBull';
+      src: url('./fonts/FuturaforRedBull-CondBold.woff2') format('woff2');
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       min-height: 100vh;
-      background: url('https://pub-e12eb7874b084e1da7840ee4870ec95f.r2.dev/soundclash-background-fixed.png') center center / cover no-repeat fixed;
+      background: url('https://pub-e12eb7874b084e1da7840ee4870ec95f.r2.dev/app_bg_final.png') center center / cover no-repeat fixed;
       backdrop-filter: brightness(0.3);
-      font-family: 'Arial Black', Arial, sans-serif;
+      font-family: 'FuturaRedBull', 'Arial Black', Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -38,7 +46,7 @@
     }
 
     /* ── Shared container width ── */
-    .score-row, .record-card, .feed-card { width: 100%; max-width: 600px; }
+    .score-row, .record-card, .feed-card { width: 100%; max-width: 900px; }
 
     /* ── Title ── */
     .title {
@@ -107,32 +115,59 @@
     /* ── Record cards ── */
     .record-card {
       border-radius: 20px;
-      padding: 12px 18px;
-      display: flex;
-      flex-direction: column;
+      padding: 10px 14px;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
       align-items: center;
-      gap: 2px;
+      gap: 12px;
+    }
+
+    .record-divider {
+      width: 1px;
+      height: 70%;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .record-half {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 4px 6px;
     }
 
     .record-label {
-      font-size: clamp(8px, 2vw, 10px);
+      font-size: clamp(8px, 1.8vw, 11px);
       font-weight: 900;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      text-align: center;
+      white-space: nowrap;
     }
 
-    .record-value {
-      font-size: clamp(13px, 3.5vw, 18px);
+    .record-label.red  { color: #ff8080; }
+    .record-label.blue { color: #80b4ff; }
+
+    .record-nickname {
+      font-size: clamp(10px, 2.2vw, 13px);
       font-weight: 900;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.95);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      min-width: 0;
       text-align: center;
+    }
+
+    .record-value {
+      font-size: clamp(12px, 2.6vw, 16px);
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      text-align: right;
     }
 
     .record-value.red  { color: #ff8080; text-shadow: 0 0 12px rgba(255,80,80,0.45); }
@@ -156,13 +191,13 @@
       min-height: 120px;
     }
 
-    /* Each row: rank | team+time | meta | score */
+    /* Each row: rank | team | time | nickname | duration | dB | score */
     .feed-row {
       display: grid;
-      grid-template-columns: 22px 1fr auto auto;
+      grid-template-columns: 22px auto auto 1fr auto auto auto;
       align-items: center;
-      gap: 8px;
-      padding: 9px 2px;
+      gap: 10px;
+      padding: 10px 4px;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       animation: rowIn 0.4s ease forwards;
     }
@@ -182,16 +217,15 @@
       flex-shrink: 0;
     }
 
-    /* Team name + time stacked vertically on small screens */
     .feed-team-name {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: clamp(9px, 2.5vw, 11px);
+      font-size: clamp(9px, 2vw, 11px);
       font-weight: 900;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      min-width: 0;
+      white-space: nowrap;
     }
 
     .feed-team-name.red  { color: #ff8080; }
@@ -204,24 +238,40 @@
     }
 
     .feed-time {
-      font-size: clamp(7px, 1.8vw, 9px);
+      font-size: clamp(7px, 1.7vw, 9px);
       font-weight: 700;
       color: rgba(255,255,255,0.35);
       letter-spacing: 0.03em;
       white-space: nowrap;
     }
 
-    .feed-meta {
-      font-size: clamp(8px, 2vw, 10px);
+    .feed-nickname {
+      font-size: clamp(11px, 2.4vw, 15px);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.95);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+
+    .feed-nickname.red  { color: #ff8080; }
+    .feed-nickname.blue { color: #80b4ff; }
+
+    .feed-duration, .feed-db {
+      font-size: clamp(8px, 1.8vw, 10px);
       font-weight: 700;
-      color: rgba(255,255,255,0.4);
-      text-align: right;
+      color: rgba(255,255,255,0.5);
       white-space: nowrap;
       letter-spacing: 0.03em;
+      text-align: right;
     }
 
     .feed-score {
-      font-size: clamp(13px, 3.5vw, 18px);
+      font-size: clamp(13px, 3vw, 18px);
       font-weight: 900;
       font-style: italic;
       text-align: right;
@@ -239,10 +289,13 @@
       margin-left: 1px;
     }
 
-    /* hide meta column on very narrow screens */
-    @media (max-width: 360px) {
-      .feed-meta { display: none; }
-      .feed-row  { grid-template-columns: 20px 1fr auto; }
+    /* narrow screens: hide meta columns, stack essentials */
+    @media (max-width: 540px) {
+      .feed-row {
+        grid-template-columns: 20px auto 1fr auto;
+        gap: 8px;
+      }
+      .feed-time, .feed-duration, .feed-db { display: none; }
     }
 
     .empty {
@@ -300,7 +353,7 @@
 <body>
 
   <img src="https://pub-e12eb7874b084e1da7840ee4870ec95f.r2.dev/soundclash-logo.avif" alt="Sound Clash" style="height:clamp(48px,10vw,80px);width:auto;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5));" />
-  <div class="title">Scoreboard</div>
+  <div class="title">Red Bull Clash of Cheers leaderboard</div>
   <div class="live-badge glass">
     <div class="live-dot"></div>
     <span>LIVE</span>
@@ -322,22 +375,49 @@
 
   <!-- Records -->
   <div class="record-card glass">
-    <div class="record-label">High Score Record:</div>
-    <div class="record-value" id="rec-high">—</div>
+    <div class="record-half">
+      <div class="record-label red">High Score Team Red:</div>
+      <div class="record-nickname" id="rec-high-red-name">—</div>
+      <div class="record-value red" id="rec-high-red">—</div>
+    </div>
+    <div class="record-divider"></div>
+    <div class="record-half">
+      <div class="record-label blue">High Score Team Blue:</div>
+      <div class="record-nickname" id="rec-high-blue-name">—</div>
+      <div class="record-value blue" id="rec-high-blue">—</div>
+    </div>
   </div>
 
   <div class="record-card glass">
-    <div class="record-label">Longest Scream Record:</div>
-    <div class="record-value" id="rec-longest">—</div>
+    <div class="record-half">
+      <div class="record-label red">Longest Scream Team Red:</div>
+      <div class="record-nickname" id="rec-long-red-name">—</div>
+      <div class="record-value red" id="rec-long-red">—</div>
+    </div>
+    <div class="record-divider"></div>
+    <div class="record-half">
+      <div class="record-label blue">Longest Scream Team Blue:</div>
+      <div class="record-nickname" id="rec-long-blue-name">—</div>
+      <div class="record-value blue" id="rec-long-blue">—</div>
+    </div>
   </div>
 
   <div class="record-card glass">
-    <div class="record-label">Loudest Scream Record:</div>
-    <div class="record-value" id="rec-loudest">—</div>
+    <div class="record-half">
+      <div class="record-label red">Loudest Scream Team Red:</div>
+      <div class="record-nickname" id="rec-loud-red-name">—</div>
+      <div class="record-value red" id="rec-loud-red">—</div>
+    </div>
+    <div class="record-divider"></div>
+    <div class="record-half">
+      <div class="record-label blue">Loudest Scream Team Blue:</div>
+      <div class="record-nickname" id="rec-loud-blue-name">—</div>
+      <div class="record-value blue" id="rec-loud-blue">—</div>
+    </div>
   </div>
 
-  <!-- Recent screams -->
-  <div class="recent-label">Recent Screams:</div>
+  <!-- Leaderboard -->
+  <div class="recent-label">Leaderboard:</div>
 
   <div class="feed-card glass">
     <div id="feed">
@@ -379,9 +459,18 @@
     const $cardBlu   = document.getElementById('card-blue');
     const $feed      = document.getElementById('feed');
     const $empty     = document.getElementById('empty-state');
-    const $recHigh   = document.getElementById('rec-high');
-    const $recLong   = document.getElementById('rec-longest');
-    const $recLoud   = document.getElementById('rec-loudest');
+    const $recHighRed      = document.getElementById('rec-high-red');
+    const $recHighRedName  = document.getElementById('rec-high-red-name');
+    const $recHighBlue     = document.getElementById('rec-high-blue');
+    const $recHighBlueName = document.getElementById('rec-high-blue-name');
+    const $recLongRed      = document.getElementById('rec-long-red');
+    const $recLongRedName  = document.getElementById('rec-long-red-name');
+    const $recLongBlue     = document.getElementById('rec-long-blue');
+    const $recLongBlueName = document.getElementById('rec-long-blue-name');
+    const $recLoudRed      = document.getElementById('rec-loud-red');
+    const $recLoudRedName  = document.getElementById('rec-loud-red-name');
+    const $recLoudBlue     = document.getElementById('rec-loud-blue');
+    const $recLoudBlueName = document.getElementById('rec-loud-blue-name');
 
     function fmt(n)  { return Number(n).toLocaleString(); }
 
@@ -401,19 +490,28 @@
 
     function teamColor(team) { return team === 'red' ? '#ff6060' : '#6090ff'; }
 
+    function escapeHtml(s) {
+      return String(s ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[c]));
+    }
+
     function buildRow(r) {
       const sec = (r.scream_time_ms / 1000).toFixed(2);
       const row = document.createElement('div');
       row.className = 'feed-row';
       row.dataset.id = String(r.id);
+      const name = r.nickname && r.nickname.trim() ? r.nickname : '—';
       row.innerHTML = `
         <div class="feed-rank">--</div>
         <div class="feed-team-name ${r.team}">
           <div class="feed-team-dot" style="background:${teamColor(r.team)}"></div>
           TEAM ${r.team.toUpperCase()}
-          <span class="feed-time">${timeAgo(r.created_at)}</span>
         </div>
-        <div class="feed-meta">${sec}s &nbsp; ${Math.round(r.peak_scream_db)}dB</div>
+        <div class="feed-time">${timeAgo(r.created_at)}</div>
+        <div class="feed-nickname ${r.team}">${escapeHtml(name)}</div>
+        <div class="feed-duration">${sec}s</div>
+        <div class="feed-db">${Math.round(r.peak_scream_db)}dB</div>
         <div class="feed-score ${r.team}">${fmt(r.final_score)}<span>pts</span></div>
       `;
       return row;
@@ -424,8 +522,9 @@
       if (!pw) return;
 
       try {
-        const res = await fetch(`${API_URL}/api/scores`, {
-          headers: { 'x-api-password': pw }
+        const res = await fetch(`${API_URL}/api/scores?t=${Date.now()}`, {
+          headers: { 'x-api-password': pw },
+          cache: 'no-store'
         });
 
         if (res.status === 401) {
@@ -437,15 +536,24 @@
         const rows = await res.json();
 
         let redPts = 0, bluePts = 0, redCount = 0, blueCount = 0;
-        let highScoreRow = null, longestRow = null, loudestRow = null;
+        const best = {
+          red:  { high: null, long: null, loud: null },
+          blue: { high: null, long: null, loud: null },
+        };
 
         for (const r of rows) {
-          if (r.team === 'red')  { redPts  += r.final_score; redCount++;  }
-          if (r.team === 'blue') { bluePts += r.final_score; blueCount++; }
+          const score = Number(r.final_score);
+          const ms    = Number(r.scream_time_ms);
+          const db    = Number(r.peak_scream_db);
 
-          if (!highScoreRow || r.final_score > highScoreRow.final_score) highScoreRow = r;
-          if (!longestRow  || r.scream_time_ms > longestRow.scream_time_ms) longestRow = r;
-          if (!loudestRow  || r.peak_scream_db > loudestRow.peak_scream_db) loudestRow = r;
+          if (r.team === 'red')  { redPts  += score; redCount++;  }
+          if (r.team === 'blue') { bluePts += score; blueCount++; }
+
+          const b = best[r.team];
+          if (!b) continue;
+          if (!b.high || score > Number(b.high.final_score))    b.high = r;
+          if (!b.long || ms    > Number(b.long.scream_time_ms)) b.long = r;
+          if (!b.loud || db    > Number(b.loud.peak_scream_db)) b.loud = r;
         }
 
         if (redPts !== prevRedPts)  { $scoreRed.textContent = fmt(redPts);  bump($scoreRed);  prevRedPts  = redPts;  }
@@ -454,43 +562,56 @@
         $countRed.textContent = `${redCount} scream${redCount !== 1 ? 's' : ''}`;
         $countBlu.textContent = `${blueCount} scream${blueCount !== 1 ? 's' : ''}`;
 
-        // Records
-        if (highScoreRow) {
-          $recHigh.textContent = `${fmt(highScoreRow.final_score)} pts — Team ${highScoreRow.team.toUpperCase()}`;
-          $recHigh.className = `record-value ${highScoreRow.team}`;
-        }
-        if (longestRow) {
-          $recLong.textContent = `${(longestRow.scream_time_ms/1000).toFixed(2)}s — Team ${longestRow.team.toUpperCase()}`;
-          $recLong.className = `record-value ${longestRow.team}`;
-        }
-        if (loudestRow) {
-          $recLoud.textContent = `${Math.round(loudestRow.peak_scream_db)}dB — Team ${loudestRow.team.toUpperCase()}`;
-          $recLoud.className = `record-value ${loudestRow.team}`;
-        }
+        // Records — per-team best
+        const nameOf = r => (r && r.nickname && r.nickname.trim()) ? r.nickname : '—';
 
-        const recent = [...rows]
-          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        $recHighRedName.textContent  = best.red.high  ? nameOf(best.red.high)  : '—';
+        $recHighRed.textContent      = best.red.high  ? `${fmt(best.red.high.final_score)} pts` : '—';
+        $recHighBlueName.textContent = best.blue.high ? nameOf(best.blue.high) : '—';
+        $recHighBlue.textContent     = best.blue.high ? `${fmt(best.blue.high.final_score)} pts` : '—';
+
+        $recLongRedName.textContent  = best.red.long  ? nameOf(best.red.long)  : '—';
+        $recLongRed.textContent      = best.red.long  ? `${(best.red.long.scream_time_ms/1000).toFixed(2)}s` : '—';
+        $recLongBlueName.textContent = best.blue.long ? nameOf(best.blue.long) : '—';
+        $recLongBlue.textContent     = best.blue.long ? `${(best.blue.long.scream_time_ms/1000).toFixed(2)}s` : '—';
+
+        $recLoudRedName.textContent  = best.red.loud  ? nameOf(best.red.loud)  : '—';
+        $recLoudRed.textContent      = best.red.loud  ? `${Math.round(best.red.loud.peak_scream_db)}dB` : '—';
+        $recLoudBlueName.textContent = best.blue.loud ? nameOf(best.blue.loud) : '—';
+        $recLoudBlue.textContent     = best.blue.loud ? `${Math.round(best.blue.loud.peak_scream_db)}dB` : '—';
+
+        const leaderboard = [...rows]
+          .sort((a, b) => Number(b.final_score) - Number(a.final_score))
           .slice(0, FEED_MAX);
 
-        if (recent.length === 0) { $empty.style.display = 'block'; return; }
+        if (leaderboard.length === 0) { $empty.style.display = 'block'; return; }
         $empty.style.display = 'none';
 
-        const recentIdSet = new Set(recent.map(r => String(r.id)));
+        const topIdSet = new Set(leaderboard.map(r => String(r.id)));
 
+        // Drop rows that fell off the top N
         for (const id of [...renderedIds]) {
-          if (!recentIdSet.has(id)) {
+          if (!topIdSet.has(id)) {
             const el = $feed.querySelector(`[data-id="${id}"]`);
             if (el) el.remove();
             renderedIds.delete(id);
           }
         }
 
-        const newEntries = recent.filter(r => !renderedIds.has(String(r.id)));
-        [...newEntries].reverse().forEach(r => {
-          const row = buildRow(r);
-          const first = $feed.querySelector('.feed-row');
-          first ? $feed.insertBefore(row, first) : $feed.appendChild(row);
-          renderedIds.add(String(r.id));
+        // Ensure each leaderboard row exists and is in the correct order.
+        // appendChild on an existing node moves it without retriggering animation.
+        leaderboard.forEach(r => {
+          const id = String(r.id);
+          let row = $feed.querySelector(`[data-id="${id}"]`);
+          if (!row) {
+            row = buildRow(r);
+            renderedIds.add(id);
+          } else {
+            // refresh relative time so stale rows don't sit at "0s ago" forever
+            const t = row.querySelector('.feed-time');
+            if (t) t.textContent = timeAgo(r.created_at);
+          }
+          $feed.appendChild(row);
         });
 
         $feed.querySelectorAll('.feed-row').forEach((el, i) => {
