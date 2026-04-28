@@ -4,44 +4,47 @@ import { Audio } from 'expo-av';
 import { Mic, MicOff, Link, Unlink, Settings2, BarChart3 } from 'lucide-react-native';
 
 const NUM_LEDS = 17;
+const PI_NUM_PIXELS = 20;
 
 export default function SoundClashApp() {
   const [db, setDb] = useState(0);
   const [minDb, setMinDb] = useState('45');
   const [maxDb, setMaxDb] = useState('120');
-  const [ip, setIp] = useState('192.168.4.1');
+  const [ip, setIp] = useState('192.168.1.50');
   const [connected, setConnected] = useState(false);
   const [monitoring, setMonitoring] = useState(false);
   const [ledLevel, setLedLevel] = useState(0);
   const [team, setTeam] = useState<'red' | 'blue'>('red');
 
-  const socketRef = useRef(null);
   const recordingRef = useRef(null);
   const teamRef = useRef<'red' | 'blue'>('red');
+  const ipRef = useRef(ip);
+  const connectedRef = useRef(false);
+
+  useEffect(() => { ipRef.current = ip; }, [ip]);
 
   useEffect(() => {
     return () => {
-      if (socketRef.current) socketRef.current.close();
       if (recordingRef.current) recordingRef.current.stopAndUnloadAsync();
     };
   }, []);
 
-  const connect = () => {
-    if (socketRef.current) {
-      socketRef.current.close();
-      socketRef.current = null;
+  const connect = async () => {
+    if (connectedRef.current) {
+      connectedRef.current = false;
       setConnected(false);
       return;
     }
 
     try {
-      const ws = new WebSocket(`ws://${ip}:81`);
-      ws.onopen = () => setConnected(true);
-      ws.onclose = () => setConnected(false);
-      ws.onerror = () => setConnected(false);
-      socketRef.current = ws;
+      const res = await fetch(`http://${ip}:5000/status`);
+      const ok = res.ok;
+      connectedRef.current = ok;
+      setConnected(ok);
     } catch (e) {
-      console.log('WS Connect Error:', e);
+      connectedRef.current = false;
+      setConnected(false);
+      console.log('Pi status check failed:', e);
     }
   };
 
@@ -69,8 +72,13 @@ export default function SoundClashApp() {
 
     setLedLevel(level);
 
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(`${teamRef.current}:${level}`);
+    if (connectedRef.current) {
+      const piLevel = Math.round(normalized * PI_NUM_PIXELS);
+      fetch(`http://${ipRef.current}:5000/sound`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ team: teamRef.current, level: piLevel }),
+      }).catch(() => {});
     }
   };
 
@@ -130,13 +138,13 @@ export default function SoundClashApp() {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={styles.title}>Sound <Text style={styles.accent}>Monitor</Text></Text>
-          <Text style={styles.subtitle}>Wemos LED Controller</Text>
+          <Text style={styles.subtitle}>Pi LED Controller</Text>
         </View>
 
         <View style={styles.card}>
           <View style={styles.inputRow}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Wemos IP</Text>
+              <Text style={styles.label}>Pi IP</Text>
               <TextInput
                 style={styles.input}
                 value={ip}
@@ -155,7 +163,7 @@ export default function SoundClashApp() {
             </TouchableOpacity>
           </View>
           <Text style={[styles.status, connected && styles.statusOn]}>
-            {connected ? 'Connected to Wemos' : 'Disconnected'}
+            {connected ? 'Connected to Pi' : 'Disconnected'}
           </Text>
         </View>
 
