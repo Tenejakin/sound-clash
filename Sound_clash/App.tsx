@@ -765,6 +765,8 @@ const App: React.FC = () => {
     if (streamRef.current) streamRef.current.getTracks().forEach(t => t.stop());
     if (audioContextRef.current) audioContextRef.current.close();
     setShowSplash(true);
+    setShowNicknameScreen(false);
+    setNickname('');
     setShowJotForm(false);
     setIsMonitoring(false);
     setIsTracking(false);
