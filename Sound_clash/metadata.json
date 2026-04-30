@@ -1,0 +1,8 @@
+{
+  "name": "Sound Clash: Red vs Blue",
+  "description": "A high-stakes futuristic sound battle. Choose your side, sustain the roar, and dominate the leaderboard in a clash of decibels.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}

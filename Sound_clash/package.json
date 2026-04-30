@@ -1,0 +1,37 @@
+{
+  "name": "sound-clash:-red-vs-blue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "server": "tsx server.ts",
+    "server:dev": "tsx watch server.ts",
+    "start": "concurrently --names \"API,VITE\" --prefix-colors \"yellow,cyan\" \"npm run server:dev\" \"npm run dev\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prod": "vite build && tsx server.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.998.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.16.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "pg": "^8.18.0",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "tsx": "^4.21.0",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.2.1",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}
