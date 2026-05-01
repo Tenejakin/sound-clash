@@ -24,36 +24,36 @@ export const S = {
   VS_LABEL:                  'VS',
 
   // ── Connecting transition (while getUserMedia initialises) ───────────────────
-  CONNECTING:                'INITIALIZING SENSORS',
+  CONNECTING:                'INICIALIZACIJA SENZORJEV',
 
   // ── Monitoring header bar ────────────────────────────────────────────────────
-  STATUS_MONITORING:         'MONITOR_ACTIVE',
-  DB_SYNCING:                '● SYNCING DB',
+  STATUS_MONITORING:         'NADZOR_AKTIVEN',
+  DB_SYNCING:                '● SINHRONIZACIJA BAZE',
   DB_ERROR:                  '✗ DB ERROR',
 
   // ── Countdown ────────────────────────────────────────────────────────────────
-  COUNTDOWN_SCREAM:          'SCREAM!',
+  COUNTDOWN_SCREAM:          'KRIČI!',
 
   // ── While waiting for scream to start ────────────────────────────────────────
-  SCANNING:                  'SCANNING_BREACH_POINTS',
+  SCANNING:                  'ISKANJE TOČK PREBOJA',
 
   // ── Score / results ──────────────────────────────────────────────────────────
-  LABEL_SCORE:               'SCORE',
+  LABEL_SCORE:               'REZULTAT',
   LABEL_YOUR_POINTS:         'Tvoje točke:',
   LABEL_PEAK:                'Vrhunec krika:',
   LABEL_TIME:                'Trajanje krika:',
-  LABEL_RANK:                'Global ranking:',
+  LABEL_RANK:                'Globalna uvrstitev:',
   LABEL_RANK_SUFFIX:         '. mesto',
   UNIT_DB:                   'db',
   UNIT_SECONDS:              's',
-  SCREAM_LOADING:            'Your scream was top 1%',
+  SCREAM_LOADING:            'Tvoj krik je bil med top 1%',
 
   // ── QR / download section ────────────────────────────────────────────────────
   QR_HEADING:                'Prenesi svoj rezultat',
-  QR_CTA:                    'SCAN TO DOWNLOAD',
+  QR_CTA:                    'SKENIRAJ ZA PRENOS',
 
   // ── Reset button ─────────────────────────────────────────────────────────────
-  BTN_RESET:                 'RESET',
+  BTN_RESET:                 'PONASTAVI',
 
   // ── JotForm screen ───────────────────────────────────────────────────────────
   JOTFORM_TITLE:             'Prijava',
@@ -81,12 +81,12 @@ export const S = {
   photoTeamLabel: (team: string) => team === 'red' ? 'RED TEAM' : 'BLUE TEAM',
 
   // ── Decibel meter ────────────────────────────────────────────────────────────
-  METER_DECIBELS_LABEL:      'DECIBELS',
-  METER_THRESHOLD_BREACH:    'THRESHOLD BREACH',
-  METER_LISTENING:           'LISTENING',
+  METER_DECIBELS_LABEL:      'DECIBELI',
+  METER_THRESHOLD_BREACH:    'PRESEŽEN PRAG',
+  METER_LISTENING:           'POSLUŠANJE',
 
   // ── Leaderboard ──────────────────────────────────────────────────────────────
-  LB_TITLE:                  'RANKINGS',
+  LB_TITLE:                  'LESTVICA',
   LB_LIVE:                   'LIVE_FEED',
   LB_EMPTY:                  'NO DATA DETECTED',
   lbTeamLabel: (team: string) => `TEAM ${team}`,
