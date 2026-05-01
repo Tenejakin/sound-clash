@@ -230,14 +230,14 @@ const App: React.FC = () => {
     return () => window.removeEventListener('message', handler);
   }, [flushSave]);
 
-  // ─── Compose result card image (client-side canvas) ─────────────────────────
+  // ─── Compose result image: clean photo with Red Bull logo at the top ────────
   const composeResultImage = useCallback(async (
     baseDataUrl: string,
-    duration: number,
-    maxDb: number,
-    team: Team,
-    rank: number,
-    score: number
+    _duration: number,
+    _maxDb: number,
+    _team: Team,
+    _rank: number,
+    _score: number
   ): Promise<string | null> => {
     try {
       const W = 1080, H = 1920;
@@ -247,7 +247,7 @@ const App: React.FC = () => {
       const ctx = offscreen.getContext('2d');
       if (!ctx) return null;
 
-      // 1. Draw base captured frame (already has team colour overlay)
+      // Draw base captured frame
       await new Promise<void>((resolve, reject) => {
         const base = new Image();
         base.onload = () => { ctx.drawImage(base, 0, 0, W, H); resolve(); };
@@ -255,55 +255,10 @@ const App: React.FC = () => {
         base.src = baseDataUrl;
       });
 
-      // 2. Subtle dark gradient at very bottom only (keeps face bright)
-      const grad = ctx.createLinearGradient(0, H * 0.55, 0, H);
-      grad.addColorStop(0, 'rgba(0,0,0,0)');
-      grad.addColorStop(1, 'rgba(0,0,0,0.35)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-
-
-      // ── helper: draw a frosted glass panel ───────────────────────────────────
-      const drawGlassPanel = (x: number, y: number, w: number, h: number, r: number) => {
-        // 1. blurred background region
-        const tmp = document.createElement('canvas');
-        tmp.width = w; tmp.height = h;
-        const tc = tmp.getContext('2d')!;
-        tc.filter = 'blur(20px)';
-        tc.drawImage(offscreen, x, y, w, h, 0, 0, w, h);
-        tc.filter = 'none';
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.roundRect(x, y, w, h, r);
-        ctx.clip();
-        ctx.drawImage(tmp, x, y);
-        ctx.fillStyle = 'rgba(255,255,255,0.18)';
-        ctx.fillRect(x, y, w, h);
-        ctx.restore();
-
-        // border
-        ctx.beginPath();
-        ctx.roundRect(x, y, w, h, r);
-        ctx.strokeStyle = 'rgba(255,255,255,0.55)';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-      };
-
-      // ── MAIN CARD ─────────────────────────────────────────────────────────────
-      const cardX = 60, cardY = 1080, cardW = W - 120, cardH = 780, cardR = 60;
-      drawGlassPanel(cardX, cardY, cardW, cardH, cardR);
-
-      // ── Load custom font ──────────────────────────────────────────────────────
-      const futura = new FontFace('FuturaRedBull', 'url(/fonts/FuturaforRedBull-CondBold.woff2)');
-      await futura.load();
-      document.fonts.add(futura);
-
-      // ── LOGO centred, height-capped so it never overlaps the team name ───────
-      const LOGO_TOP_Y = cardY + 20;
+      // Logo centred at the top
+      const LOGO_TOP_Y = 80;
       const LOGO_MAX_W = 400;
       const LOGO_MAX_H = 150;
-      let logoBottomY = LOGO_TOP_Y;
 
       if (logoDataUrlRef.current) {
         await new Promise<void>(resolve => {
@@ -314,53 +269,12 @@ const App: React.FC = () => {
             let lH = lW / aspect;
             if (lH > LOGO_MAX_H) { lH = LOGO_MAX_H; lW = lH * aspect; }
             ctx.drawImage(logo, (W - lW) / 2, LOGO_TOP_Y, lW, lH);
-            logoBottomY = LOGO_TOP_Y + lH;
             resolve();
           };
           logo.onerror = () => resolve();
           logo.src = logoDataUrlRef.current!;
         });
       }
-
-      // ── TEAM NAME centred directly below the logo ────────────────────────────
-      const teamNameY = logoBottomY + 75;
-      ctx.font = '56px FuturaRedBull, sans-serif';
-      ctx.fillStyle = '#ffffff';
-      ctx.textAlign = 'center';
-      ctx.fillText(team === 'red' ? S.TEAM_RED : S.TEAM_BLUE, W / 2, teamNameY);
-
-      // Divider below team name
-      const divY = teamNameY + 30;
-      ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(cardX + 40, divY);
-      ctx.lineTo(cardX + cardW - 40, divY);
-      ctx.stroke();
-
-      // ── STAT panels — centred horizontally, stacked ──────────────────────────
-      const statPanelW = cardW - 120;
-      const statPanelX = cardX + (cardW - statPanelW) / 2;
-      const statPanelH = 130;
-      const statPanelR = 24;
-      const statsStartY = divY + 28;
-      const statGap = 150;
-
-      const drawStatPanel = (label: string, value: string, y: number) => {
-        drawGlassPanel(statPanelX, y, statPanelW, statPanelH, statPanelR);
-        const centerX = statPanelX + statPanelW / 2;
-        ctx.textAlign = 'center';
-        ctx.font = '28px FuturaRedBull, sans-serif';
-        ctx.fillStyle = 'rgba(255,255,255,0.65)';
-        ctx.fillText(label, centerX, y + 44);
-        ctx.font = '58px FuturaRedBull, sans-serif';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText(value, centerX, y + 108);
-      };
-
-      drawStatPanel(S.CANVAS_LABEL_POINTS, score.toLocaleString('de-DE'), statsStartY);
-      drawStatPanel(S.CANVAS_LABEL_TIME, `${(duration / 1000).toFixed(2)} ${S.UNIT_SECONDS}`, statsStartY + statGap);
-      drawStatPanel(S.CANVAS_LABEL_PEAK, `${Math.round(maxDb)} ${S.UNIT_DB}`, statsStartY + statGap * 2);
 
       return offscreen.toDataURL('image/jpeg', 0.88);
     } catch (err) {
