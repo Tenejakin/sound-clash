@@ -32,9 +32,9 @@ export default async function PhotoPage({ params }: { params: Promise<{ token: s
           alt="Sound Clash"
           style={styles.logo}
         />
-        <h1 style={{ fontSize: '1.75rem', color: '#ff4444', marginBottom: '0.75rem' }}>Връзката е изтекла</h1>
+        <h1 style={{ fontSize: '1.75rem', color: '#ff4444', marginBottom: '0.75rem' }}>Линкът е изтекъл</h1>
         <p style={{ color: '#888', maxWidth: '300px', lineHeight: 1.5 }}>
-          Тази връзка към снимката е валидна само 10 минути след сесията. Помолете оператора да я изпрати отново.
+          Този линк е активен само 10 мин. след писъка.
         </p>
       </main>
     );
@@ -49,7 +49,7 @@ export default async function PhotoPage({ params }: { params: Promise<{ token: s
       />
 
       <a href={`/api/download/${token}`} style={styles.button}>
-        Изтегли
+        СВАЛИ
       </a>
     </main>
   );

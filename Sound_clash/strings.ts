@@ -9,86 +9,86 @@ export const S = {
   FOOTER:                    'SAIASUITE 2026',
 
   // ── Splash / idle screen ─────────────────────────────────────────────────────
-  TOUCH_TO_START:            'Докосни за начало',
+  TOUCH_TO_START:            'Натисни, за да започне',
 
   // ── Nickname screen ──────────────────────────────────────────────────────────
-  NICKNAME_TITLE:            'Твоят прякор',
-  NICKNAME_PLACEHOLDER:      'Въведи прякор',
-  NICKNAME_SUBMIT:           'НАПРЕД',
+  NICKNAME_TITLE:            'Името ти',
+  NICKNAME_PLACEHOLDER:      'Въведи името си',
+  NICKNAME_SUBMIT:           'Следващ',
 
   // ── Team selection screen ────────────────────────────────────────────────────
-  SELECT_PROMPT:             'SELECT YOUR FREQUENCY',
-  SELECT_TITLE:              'ИЗБЕРИ СВОЯ ОТБОР',
+  SELECT_PROMPT:             'ИЗБЕРИ ЧЕСТОТА',
+  SELECT_TITLE:              'ИЗБЕРИ ОТБОР',
   TEAM_RED_BAND:             'SIDDHARTA',
   TEAM_BLUE_BAND:            'BIG FOOT MAMA',
-  VS_LABEL:                  'VS',
+  VS_LABEL:                  'СРЕЩУ',
 
   // ── Connecting transition (while getUserMedia initialises) ───────────────────
-  CONNECTING:                'ИНИЦИАЛИЗИРАНЕ НА СЕНЗОРИТЕ',
+  CONNECTING:                'АКТИВИРАНЕ НА СЕНЗОРИТЕ',
 
   // ── Monitoring header bar ────────────────────────────────────────────────────
-  STATUS_MONITORING:         'НАБЛЮДЕНИЕ_АКТИВНО',
-  DB_SYNCING:                '● СИНХРОНИЗИРАНЕ НА БАЗАТА',
-  DB_ERROR:                  '✗ DB ERROR',
+  STATUS_MONITORING:         'ЕКРАНА Е АКТИВЕН',
+  DB_SYNCING:                '● СИНХРОНИЗИРАНЕ НА БАЗА ДАННИ',
+  DB_ERROR:                  '✗ ГРЕШКА В БАЗАТА ДАННИ',
 
   // ── Countdown ────────────────────────────────────────────────────────────────
   COUNTDOWN_SCREAM:          'КРЕЩИ!',
 
   // ── While waiting for scream to start ────────────────────────────────────────
-  SCANNING:                  'ТЪРСЕНЕ НА ТОЧКИ НА ПРОБИВ',
+  SCANNING:                  'СКАНИРАНЕ ЗА ТОЧКИ НА ПРОБИВ',
 
   // ── Score / results ──────────────────────────────────────────────────────────
   LABEL_SCORE:               'РЕЗУЛТАТ',
   LABEL_YOUR_POINTS:         'Твоите точки:',
-  LABEL_PEAK:                'Връх на вика:',
-  LABEL_TIME:                'Времетраене на вика:',
+  LABEL_PEAK:                'Пик на писъка:',
+  LABEL_TIME:                'Продължителност на писъка:',
   LABEL_RANK:                'Глобална класация:',
   LABEL_RANK_SUFFIX:         '. място',
   UNIT_DB:                   'db',
   UNIT_SECONDS:              's',
-  SCREAM_LOADING:            'Твоят вик беше в топ 1%',
+  SCREAM_LOADING:            'Писъкът ти беше сред най-добрите 1%',
 
   // ── QR / download section ────────────────────────────────────────────────────
-  QR_HEADING:                'Изтегли своя резултат',
-  QR_CTA:                    'СКАНИРАЙ ЗА ИЗТЕГЛЯНЕ',
+  QR_HEADING:                'Изтегли резултата си',
+  QR_CTA:                    'СКАНИРАЙ, ЗА ДА ИЗТЕГЛИШ',
 
   // ── Reset button ─────────────────────────────────────────────────────────────
-  BTN_RESET:                 'НУЛИРАЙ',
+  BTN_RESET:                 'РЕСТАРТ',
 
   // ── JotForm screen ───────────────────────────────────────────────────────────
-  JOTFORM_TITLE:             'Регистрация',
-  JOTFORM_SKIP:              'Не желая да участвам',
+  JOTFORM_TITLE:             'Изпрати',
+  JOTFORM_SKIP:              'Не искам да участвам',
 
   // ── Image capture overlay ────────────────────────────────────────────────────
-  captureLabel: (db: number) => `Sustained ${db.toFixed(1)} dB Breach`,
+  captureLabel: (db: number) => `Продължително надвишаване на ${db.toFixed(1)} dB`,
 
   // ── Result card image (canvas) ───────────────────────────────────────────────
   CANVAS_LABEL_POINTS:       'Моите точки:',
-  CANVAS_LABEL_TIME:         'Времетраене на вика:',
-  CANVAS_LABEL_PEAK:         'Връх на вика:',
+  CANVAS_LABEL_TIME:         'Продължителност на писъка:',
+  CANVAS_LABEL_PEAK:         'Пик на писъка:',
 
   // ── Photo (QR download) page ────────────────────────────────────────────────
-  PHOTO_LOADING:             'Loading…',
-  PHOTO_LINK_EXPIRED:        'Link Expired',
-  PHOTO_LINK_EXPIRED_BODY:   'This download link is only valid for 10 minutes after the scream.',
-  PHOTO_LINK_NOT_FOUND:      'Link not found',
-  PHOTO_TIME:                'Time',
-  PHOTO_PEAK:                'Peak',
+  PHOTO_LOADING:             'Зарежда се...',
+  PHOTO_LINK_EXPIRED:        'Линкът е изтекъл',
+  PHOTO_LINK_EXPIRED_BODY:   'Този линк е активен само 10 мин. след писъка.',
+  PHOTO_LINK_NOT_FOUND:      'Линкът не е намерен',
+  PHOTO_TIME:                'Време',
+  PHOTO_PEAK:                'Пик',
   PHOTO_UNIT_DB:             'dB',
   PHOTO_UNIT_SECONDS:        's',
-  PHOTO_DOWNLOAD:            'DOWNLOAD',
+  PHOTO_DOWNLOAD:            'СВАЛИ',
   PHOTO_FOOTER:              'RED BULL SOUNDCLASH',
-  photoTeamLabel: (team: string) => team === 'red' ? 'RED TEAM' : 'BLUE TEAM',
+  photoTeamLabel: (team: string) => team === 'red' ? 'ЧЕРВЕН ОТБОР' : 'СИН ОТБОР',
 
   // ── Decibel meter ────────────────────────────────────────────────────────────
   METER_DECIBELS_LABEL:      'ДЕЦИБЕЛИ',
-  METER_THRESHOLD_BREACH:    'ПРАГЪТ Е ПРЕВИШЕН',
+  METER_THRESHOLD_BREACH:    'ПРЕВИШАВАНЕ НА ПРАГА',
   METER_LISTENING:           'СЛУШАНЕ',
 
   // ── Leaderboard ──────────────────────────────────────────────────────────────
-  LB_TITLE:                  'КЛАСАЦИЯ',
-  LB_LIVE:                   'LIVE_FEED',
-  LB_EMPTY:                  'NO DATA DETECTED',
-  lbTeamLabel: (team: string) => `TEAM ${team}`,
+  LB_TITLE:                  'КЛАСИРАНЕ',
+  LB_LIVE:                   'НА ЖИВО',
+  LB_EMPTY:                  'НЕ СА ОТКРИТИ ДАННИ',
+  lbTeamLabel: (team: string) => `ОТБОР ${team}`,
 
 } as const;
