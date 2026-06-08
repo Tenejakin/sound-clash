@@ -4,91 +4,91 @@
 export const S = {
 
   // ── Header ──────────────────────────────────────────────────────────────────
-  TEAM_RED:                  'Skuadra e kuqe',
-  TEAM_BLUE:                 'Skuadra blu',
+  TEAM_RED:                  'Ekipi i Kuq',
+  TEAM_BLUE:                 'Ekipi i Kaltër',
   FOOTER:                    'SAIASUITE 2026',
 
   // ── Splash / idle screen ─────────────────────────────────────────────────────
   TOUCH_TO_START:            'Prek për të filluar',
 
   // ── Nickname screen ──────────────────────────────────────────────────────────
-  NICKNAME_TITLE:            'Pseudonimi yt',
-  NICKNAME_PLACEHOLDER:      'Shkruaj pseudonimin',
-  NICKNAME_SUBMIT:           'VAZHDO',
+  NICKNAME_TITLE:            'Nofka juaj',
+  NICKNAME_PLACEHOLDER:      'Vendos nofken tuaj',
+  NICKNAME_SUBMIT:           'Vazhdo',
 
   // ── Team selection screen ────────────────────────────────────────────────────
-  SELECT_PROMPT:             'SELECT YOUR FREQUENCY',
-  SELECT_TITLE:              'ZGJIDH SKUADRËN TËNDE',
+  SELECT_PROMPT:             'ZGJIDH FREKUENCËN TËNDE',
+  SELECT_TITLE:              'ZGJIDH EKIPIN TËND',
   TEAM_RED_BAND:             'SIDDHARTA',
   TEAM_BLUE_BAND:            'BIG FOOT MAMA',
   VS_LABEL:                  'VS',
 
   // ── Connecting transition (while getUserMedia initialises) ───────────────────
-  CONNECTING:                'INICIALIZIMI I SENSORËVE',
+  CONNECTING:                'Aktivizimi i sensorëve',
 
   // ── Monitoring header bar ────────────────────────────────────────────────────
-  STATUS_MONITORING:         'MONITORIMI_AKTIV',
-  DB_SYNCING:                '● SINKRONIZIM I BAZËS',
-  DB_ERROR:                  '✗ DB ERROR',
+  STATUS_MONITORING:         'Aktivizimi i Monitorit',
+  DB_SYNCING:                '● Po sinkronizohen të dhënat',
+  DB_ERROR:                  '✗ Gabim në bazën e të dhënave',
 
   // ── Countdown ────────────────────────────────────────────────────────────────
   COUNTDOWN_SCREAM:          'BËRTIT!',
 
   // ── While waiting for scream to start ────────────────────────────────────────
-  SCANNING:                  'DUKE KËRKUAR PIKAT E SHPËRTHIMIT',
+  SCANNING:                  'Po analizohen pikat e tejkalimit',
 
   // ── Score / results ──────────────────────────────────────────────────────────
-  LABEL_SCORE:               'REZULTATI',
+  LABEL_SCORE:               'Rezultati',
   LABEL_YOUR_POINTS:         'Pikët e tua:',
-  LABEL_PEAK:                'Kulmi i britmës:',
+  LABEL_PEAK:                'Kulmi i zërit:',
   LABEL_TIME:                'Kohëzgjatja e britmës:',
   LABEL_RANK:                'Renditja globale:',
   LABEL_RANK_SUFFIX:         '. vend',
   UNIT_DB:                   'db',
   UNIT_SECONDS:              's',
-  SCREAM_LOADING:            'Britma jote ishte në top 1%',
+  SCREAM_LOADING:            'Britma jote ishte në 1% më të mirat',
 
   // ── QR / download section ────────────────────────────────────────────────────
   QR_HEADING:                'Shkarko rezultatin tënd',
-  QR_CTA:                    'SKANO PËR TË SHKARKUAR',
+  QR_CTA:                    'Skano për ta shkarkuar',
 
   // ── Reset button ─────────────────────────────────────────────────────────────
-  BTN_RESET:                 'RIVENDOS',
+  BTN_RESET:                 'Rivendos',
 
   // ── JotForm screen ───────────────────────────────────────────────────────────
-  JOTFORM_TITLE:             'Regjistrimi',
+  JOTFORM_TITLE:             'Dërgo',
   JOTFORM_SKIP:              'Nuk dua të marr pjesë',
 
   // ── Image capture overlay ────────────────────────────────────────────────────
-  captureLabel: (db: number) => `Sustained ${db.toFixed(1)} dB Breach`,
+  captureLabel: (db: number) => `Tejkalim i vazhdueshëm prej ${db.toFixed(1)} dB`,
 
   // ── Result card image (canvas) ───────────────────────────────────────────────
   CANVAS_LABEL_POINTS:       'Pikët e mia:',
   CANVAS_LABEL_TIME:         'Kohëzgjatja e britmës:',
-  CANVAS_LABEL_PEAK:         'Kulmi i britmës:',
+  CANVAS_LABEL_PEAK:         'Kulmi i zërit:',
 
   // ── Photo (QR download) page ────────────────────────────────────────────────
-  PHOTO_LOADING:             'Loading…',
-  PHOTO_LINK_EXPIRED:        'Link Expired',
-  PHOTO_LINK_EXPIRED_BODY:   'This download link is only valid for 10 minutes after the scream.',
-  PHOTO_LINK_NOT_FOUND:      'Link not found',
-  PHOTO_TIME:                'Time',
-  PHOTO_PEAK:                'Peak',
+  PHOTO_LOADING:             'Duke u ngarkuar...',
+  PHOTO_LINK_EXPIRED:        'Link ka skaduar',
+  PHOTO_LINK_EXPIRED_BODY:   'Ky link për shkarkim është valid për vetëm 10 minuta pas britmës.',
+  PHOTO_LINK_NOT_FOUND:      'Link nuk u gjet',
+  PHOTO_TIME:                'Koha',
+  PHOTO_PEAK:                'Kulmi',
   PHOTO_UNIT_DB:             'dB',
   PHOTO_UNIT_SECONDS:        's',
-  PHOTO_DOWNLOAD:            'DOWNLOAD',
+  PHOTO_DOWNLOAD:            'SHKARKO',
   PHOTO_FOOTER:              'RED BULL SOUNDCLASH',
-  photoTeamLabel: (team: string) => team === 'red' ? 'RED TEAM' : 'BLUE TEAM',
+  photoTeamLabel: (team: string) => team === 'red' ? 'EKIPI I KUQ' : 'EKIPI I KALTËR',
 
   // ── Decibel meter ────────────────────────────────────────────────────────────
-  METER_DECIBELS_LABEL:      'DECIBELË',
-  METER_THRESHOLD_BREACH:    'PRAGU U TEJKALUA',
+  METER_DECIBELS_LABEL:      'DECIBELËT',
+  METER_THRESHOLD_BREACH:    'TEJKALIMI I PRAGUT',
   METER_LISTENING:           'DUKE DËGJUAR',
 
   // ── Leaderboard ──────────────────────────────────────────────────────────────
-  LB_TITLE:                  'KLASIFIKIMI',
-  LB_LIVE:                   'LIVE_FEED',
-  LB_EMPTY:                  'NO DATA DETECTED',
-  lbTeamLabel: (team: string) => `TEAM ${team}`,
+  LB_TITLE:                  'RENDITJA',
+  LB_LIVE:                   'TRANSMETIM LIVE',
+  LB_EMPTY:                  'NUK U DETEKTUAN TË DHËNA',
+  lbTeamLabel: (team: string) => `EKIPI ${team}`,
 
 } as const;

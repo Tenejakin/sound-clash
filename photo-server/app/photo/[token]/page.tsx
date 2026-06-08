@@ -32,9 +32,9 @@ export default async function PhotoPage({ params }: { params: Promise<{ token: s
           alt="Sound Clash"
           style={styles.logo}
         />
-        <h1 style={{ fontSize: '1.75rem', color: '#ff4444', marginBottom: '0.75rem' }}>Lidhja ka skaduar</h1>
+        <h1 style={{ fontSize: '1.75rem', color: '#ff4444', marginBottom: '0.75rem' }}>Link ka skaduar</h1>
         <p style={{ color: '#888', maxWidth: '300px', lineHeight: 1.5 }}>
-          Kjo lidhje e fotos është e vlefshme vetëm 10 minuta pas sesionit tënd. Kërko nga operatori ta ridërgojë.
+          Ky link për shkarkim është valid për vetëm 10 minuta pas britmës.
         </p>
       </main>
     );
@@ -49,7 +49,7 @@ export default async function PhotoPage({ params }: { params: Promise<{ token: s
       />
 
       <a href={`/api/download/${token}`} style={styles.button}>
-        Shkarko
+        SHKARKO
       </a>
     </main>
   );
