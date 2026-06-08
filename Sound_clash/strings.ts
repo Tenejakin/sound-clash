@@ -4,68 +4,68 @@
 export const S = {
 
   // ── Header ──────────────────────────────────────────────────────────────────
-  TEAM_RED:                  'Rdeča ekipa',
-  TEAM_BLUE:                 'Modra ekipa',
+  TEAM_RED:                  'Skuadra e kuqe',
+  TEAM_BLUE:                 'Skuadra blu',
   FOOTER:                    'SAIASUITE 2026',
 
   // ── Splash / idle screen ─────────────────────────────────────────────────────
-  TOUCH_TO_START:            'Dotakni se za začetek',
+  TOUCH_TO_START:            'Prek për të filluar',
 
   // ── Nickname screen ──────────────────────────────────────────────────────────
-  NICKNAME_TITLE:            'Tvoj vzdevek',
-  NICKNAME_PLACEHOLDER:      'Vnesi vzdevek',
-  NICKNAME_SUBMIT:           'NAPREJ',
+  NICKNAME_TITLE:            'Pseudonimi yt',
+  NICKNAME_PLACEHOLDER:      'Shkruaj pseudonimin',
+  NICKNAME_SUBMIT:           'VAZHDO',
 
   // ── Team selection screen ────────────────────────────────────────────────────
   SELECT_PROMPT:             'SELECT YOUR FREQUENCY',
-  SELECT_TITLE:              'IZBERI SVOJO EKIPO',
+  SELECT_TITLE:              'ZGJIDH SKUADRËN TËNDE',
   TEAM_RED_BAND:             'SIDDHARTA',
   TEAM_BLUE_BAND:            'BIG FOOT MAMA',
   VS_LABEL:                  'VS',
 
   // ── Connecting transition (while getUserMedia initialises) ───────────────────
-  CONNECTING:                'INICIALIZACIJA SENZORJEV',
+  CONNECTING:                'INICIALIZIMI I SENSORËVE',
 
   // ── Monitoring header bar ────────────────────────────────────────────────────
-  STATUS_MONITORING:         'NADZOR_AKTIVEN',
-  DB_SYNCING:                '● SINHRONIZACIJA BAZE',
+  STATUS_MONITORING:         'MONITORIMI_AKTIV',
+  DB_SYNCING:                '● SINKRONIZIM I BAZËS',
   DB_ERROR:                  '✗ DB ERROR',
 
   // ── Countdown ────────────────────────────────────────────────────────────────
-  COUNTDOWN_SCREAM:          'KRIČI!',
+  COUNTDOWN_SCREAM:          'BËRTIT!',
 
   // ── While waiting for scream to start ────────────────────────────────────────
-  SCANNING:                  'ISKANJE TOČK PREBOJA',
+  SCANNING:                  'DUKE KËRKUAR PIKAT E SHPËRTHIMIT',
 
   // ── Score / results ──────────────────────────────────────────────────────────
-  LABEL_SCORE:               'REZULTAT',
-  LABEL_YOUR_POINTS:         'Tvoje točke:',
-  LABEL_PEAK:                'Vrhunec krika:',
-  LABEL_TIME:                'Trajanje krika:',
-  LABEL_RANK:                'Globalna uvrstitev:',
-  LABEL_RANK_SUFFIX:         '. mesto',
+  LABEL_SCORE:               'REZULTATI',
+  LABEL_YOUR_POINTS:         'Pikët e tua:',
+  LABEL_PEAK:                'Kulmi i britmës:',
+  LABEL_TIME:                'Kohëzgjatja e britmës:',
+  LABEL_RANK:                'Renditja globale:',
+  LABEL_RANK_SUFFIX:         '. vend',
   UNIT_DB:                   'db',
   UNIT_SECONDS:              's',
-  SCREAM_LOADING:            'Tvoj krik je bil med top 1%',
+  SCREAM_LOADING:            'Britma jote ishte në top 1%',
 
   // ── QR / download section ────────────────────────────────────────────────────
-  QR_HEADING:                'Prenesi svoj rezultat',
-  QR_CTA:                    'SKENIRAJ ZA PRENOS',
+  QR_HEADING:                'Shkarko rezultatin tënd',
+  QR_CTA:                    'SKANO PËR TË SHKARKUAR',
 
   // ── Reset button ─────────────────────────────────────────────────────────────
-  BTN_RESET:                 'PONASTAVI',
+  BTN_RESET:                 'RIVENDOS',
 
   // ── JotForm screen ───────────────────────────────────────────────────────────
-  JOTFORM_TITLE:             'Prijava',
-  JOTFORM_SKIP:              'Ne želim sodelovati',
+  JOTFORM_TITLE:             'Regjistrimi',
+  JOTFORM_SKIP:              'Nuk dua të marr pjesë',
 
   // ── Image capture overlay ────────────────────────────────────────────────────
   captureLabel: (db: number) => `Sustained ${db.toFixed(1)} dB Breach`,
 
   // ── Result card image (canvas) ───────────────────────────────────────────────
-  CANVAS_LABEL_POINTS:       'Moje točke:',
-  CANVAS_LABEL_TIME:         'Trajanje krika:',
-  CANVAS_LABEL_PEAK:         'Vrhunec krika:',
+  CANVAS_LABEL_POINTS:       'Pikët e mia:',
+  CANVAS_LABEL_TIME:         'Kohëzgjatja e britmës:',
+  CANVAS_LABEL_PEAK:         'Kulmi i britmës:',
 
   // ── Photo (QR download) page ────────────────────────────────────────────────
   PHOTO_LOADING:             'Loading…',
@@ -81,12 +81,12 @@ export const S = {
   photoTeamLabel: (team: string) => team === 'red' ? 'RED TEAM' : 'BLUE TEAM',
 
   // ── Decibel meter ────────────────────────────────────────────────────────────
-  METER_DECIBELS_LABEL:      'DECIBELI',
-  METER_THRESHOLD_BREACH:    'PRESEŽEN PRAG',
-  METER_LISTENING:           'POSLUŠANJE',
+  METER_DECIBELS_LABEL:      'DECIBELË',
+  METER_THRESHOLD_BREACH:    'PRAGU U TEJKALUA',
+  METER_LISTENING:           'DUKE DËGJUAR',
 
   // ── Leaderboard ──────────────────────────────────────────────────────────────
-  LB_TITLE:                  'LESTVICA',
+  LB_TITLE:                  'KLASIFIKIMI',
   LB_LIVE:                   'LIVE_FEED',
   LB_EMPTY:                  'NO DATA DETECTED',
   lbTeamLabel: (team: string) => `TEAM ${team}`,

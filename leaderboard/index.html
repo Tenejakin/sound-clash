@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sound Clash — Live Leaderboard</title>
+  <title>Red Bull Clash of Cheers klasifikimi</title>
   <style>
     @font-face {
       font-family: 'FuturaRedBull';
@@ -353,7 +353,7 @@
 <body>
 
   <img src="https://pub-e12eb7874b084e1da7840ee4870ec95f.r2.dev/soundclash-logo.avif" alt="Sound Clash" style="height:clamp(48px,10vw,80px);width:auto;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5));" />
-  <div class="title">Red Bull Clash of Cheers leaderboard</div>
+  <div class="title">Red Bull Clash of Cheers klasifikimi</div>
   <div class="live-badge glass">
     <div class="live-dot"></div>
     <span>LIVE</span>
@@ -362,27 +362,27 @@
   <!-- Team scores -->
   <div class="score-row">
     <div class="team-card glass red" id="card-red">
-      <div class="team-label">Team Red</div>
+      <div class="team-label">Skuadra e kuqe</div>
       <div class="team-score" id="score-red">0</div>
-      <div class="team-meta" id="count-red">0 screams</div>
+      <div class="team-meta" id="count-red">0 britma</div>
     </div>
     <div class="team-card glass blue" id="card-blue">
-      <div class="team-label">Team Blue</div>
+      <div class="team-label">Skuadra blu</div>
       <div class="team-score" id="score-blue">0</div>
-      <div class="team-meta" id="count-blue">0 screams</div>
+      <div class="team-meta" id="count-blue">0 britma</div>
     </div>
   </div>
 
   <!-- Records -->
   <div class="record-card glass">
     <div class="record-half">
-      <div class="record-label red">High Score Team Red:</div>
+      <div class="record-label red">Rezultati më i mirë Skuadra e kuqe:</div>
       <div class="record-nickname" id="rec-high-red-name">—</div>
       <div class="record-value red" id="rec-high-red">—</div>
     </div>
     <div class="record-divider"></div>
     <div class="record-half">
-      <div class="record-label blue">High Score Team Blue:</div>
+      <div class="record-label blue">Rezultati më i mirë Skuadra blu:</div>
       <div class="record-nickname" id="rec-high-blue-name">—</div>
       <div class="record-value blue" id="rec-high-blue">—</div>
     </div>
@@ -390,13 +390,13 @@
 
   <div class="record-card glass">
     <div class="record-half">
-      <div class="record-label red">Longest Scream Team Red:</div>
+      <div class="record-label red">Britma më e gjatë Skuadra e kuqe:</div>
       <div class="record-nickname" id="rec-long-red-name">—</div>
       <div class="record-value red" id="rec-long-red">—</div>
     </div>
     <div class="record-divider"></div>
     <div class="record-half">
-      <div class="record-label blue">Longest Scream Team Blue:</div>
+      <div class="record-label blue">Britma më e gjatë Skuadra blu:</div>
       <div class="record-nickname" id="rec-long-blue-name">—</div>
       <div class="record-value blue" id="rec-long-blue">—</div>
     </div>
@@ -404,24 +404,24 @@
 
   <div class="record-card glass">
     <div class="record-half">
-      <div class="record-label red">Loudest Scream Team Red:</div>
+      <div class="record-label red">Britma më e fortë Skuadra e kuqe:</div>
       <div class="record-nickname" id="rec-loud-red-name">—</div>
       <div class="record-value red" id="rec-loud-red">—</div>
     </div>
     <div class="record-divider"></div>
     <div class="record-half">
-      <div class="record-label blue">Loudest Scream Team Blue:</div>
+      <div class="record-label blue">Britma më e fortë Skuadra blu:</div>
       <div class="record-nickname" id="rec-loud-blue-name">—</div>
       <div class="record-value blue" id="rec-loud-blue">—</div>
     </div>
   </div>
 
   <!-- Leaderboard -->
-  <div class="recent-label">Leaderboard:</div>
+  <div class="recent-label">Klasifikimi:</div>
 
   <div class="feed-card glass">
     <div id="feed">
-      <div class="empty" id="empty-state">AWAITING INCOMING SIGNALS...</div>
+      <div class="empty" id="empty-state">NË PRITJE TË REZULTATEVE...</div>
     </div>
   </div>
 
@@ -476,9 +476,9 @@
 
     function timeAgo(iso) {
       const s = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
-      if (s < 60)   return `${s}s ago`;
-      if (s < 3600) return `${Math.floor(s/60)}m ago`;
-      return `${Math.floor(s/3600)}h ago`;
+      if (s < 60)   return `para ${s}s`;
+      if (s < 3600) return `para ${Math.floor(s/60)}min`;
+      return `para ${Math.floor(s/3600)}h`;
     }
 
     function bump(el) {
@@ -512,7 +512,7 @@
         <div class="feed-nickname ${r.team}">${escapeHtml(name)}</div>
         <div class="feed-duration">${sec}s</div>
         <div class="feed-db">${Math.round(r.peak_scream_db)}dB</div>
-        <div class="feed-score ${r.team}">${fmt(r.final_score)}<span>pts</span></div>
+        <div class="feed-score ${r.team}">${fmt(r.final_score)}<span>pikë</span></div>
       `;
       return row;
     }
@@ -559,16 +559,16 @@
         if (redPts !== prevRedPts)  { $scoreRed.textContent = fmt(redPts);  bump($scoreRed);  prevRedPts  = redPts;  }
         if (bluePts !== prevBluePts){ $scoreBlu.textContent = fmt(bluePts); bump($scoreBlu); prevBluePts = bluePts; }
 
-        $countRed.textContent = `${redCount} scream${redCount !== 1 ? 's' : ''}`;
-        $countBlu.textContent = `${blueCount} scream${blueCount !== 1 ? 's' : ''}`;
+        $countRed.textContent = `${redCount} britm${redCount !== 1 ? 'a' : 'ë'}`;
+        $countBlu.textContent = `${blueCount} britm${blueCount !== 1 ? 'a' : 'ë'}`;
 
         // Records — per-team best
         const nameOf = r => (r && r.nickname && r.nickname.trim()) ? r.nickname : '—';
 
         $recHighRedName.textContent  = best.red.high  ? nameOf(best.red.high)  : '—';
-        $recHighRed.textContent      = best.red.high  ? `${fmt(best.red.high.final_score)} pts` : '—';
+        $recHighRed.textContent      = best.red.high  ? `${fmt(best.red.high.final_score)} pikë` : '—';
         $recHighBlueName.textContent = best.blue.high ? nameOf(best.blue.high) : '—';
-        $recHighBlue.textContent     = best.blue.high ? `${fmt(best.blue.high.final_score)} pts` : '—';
+        $recHighBlue.textContent     = best.blue.high ? `${fmt(best.blue.high.final_score)} pikë` : '—';
 
         $recLongRedName.textContent  = best.red.long  ? nameOf(best.red.long)  : '—';
         $recLongRed.textContent      = best.red.long  ? `${(best.red.long.scream_time_ms/1000).toFixed(2)}s` : '—';
