@@ -1,4 +1,4 @@
-export const metadata = { title: 'Sound Clash – Your Photo' };
+export const metadata = { title: 'Sound Clash – Твоята снимка' };
 
 const fontFaceCss = `
 @font-face {
