@@ -19,6 +19,9 @@ const SCORE_MULTIPLIER = Number(import.meta.env.VITE_SCORE_MULTIPLIER) || 1;
 const BACKGROUND_URL = import.meta.env.VITE_BACKGROUND_URL || '/r2/app_bg_final.png';
 const LOGO_URL = import.meta.env.VITE_LOGO_URL || '/r2/Logo.png';
 const JOTFORM_BASE_URL = import.meta.env.VITE_JOTFORM_URL || 'https://redbull.jotform.com/261021301301027';
+// Photo-server base for the QR download link. Per-country: Slovenia → redbull.saia.si,
+// Kosovo/Albanian → ks-rebull.saia.si. Override via VITE_PHOTO_BASE_URL.
+const PHOTO_BASE_URL = import.meta.env.VITE_PHOTO_BASE_URL || 'https://redbull.saia.si';
 
 // Pi LED API (Flask). Forced to http:// because led_api.py is plain HTTP.
 // Defaults to the same hostname the app is served from, on port 5000.
@@ -928,7 +931,7 @@ const App: React.FC = () => {
                           <p className="text-base font-black text-white text-center leading-tight">{S.QR_HEADING}</p>
                           {savedToken ? (
                             <div className="bg-white p-2 rounded-xl w-full">
-                              <QRCodeSVG value={`https://redbull.saia.si/photo/${savedToken}`} size={999} style={{ width: '100%', height: 'auto' }} level="M" />
+                              <QRCodeSVG value={`${PHOTO_BASE_URL}/photo/${savedToken}`} size={999} style={{ width: '100%', height: 'auto' }} level="M" />
                             </div>
                           ) : (
                             <div className="w-full aspect-square bg-white/10 rounded-xl animate-pulse" />

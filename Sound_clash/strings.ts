@@ -24,18 +24,18 @@ export const S = {
   VS_LABEL:                  'VS',
 
   // ── Connecting transition (while getUserMedia initialises) ───────────────────
-  CONNECTING:                'Aktivizimi i sensorëve',
+  CONNECTING:                'AKTIVIZIMI I SENSORËVE',
 
   // ── Monitoring header bar ────────────────────────────────────────────────────
-  STATUS_MONITORING:         'Aktivizimi i Monitorit',
-  DB_SYNCING:                '● Po sinkronizohen të dhënat',
-  DB_ERROR:                  '✗ Gabim në bazën e të dhënave',
+  STATUS_MONITORING:         'AKTIVIZIMI I MONITORIT',
+  DB_SYNCING:                'PO SINKRONIZOHEN TË DHËNAT',
+  DB_ERROR:                  'GABIM NË BAZËN E TË DHËNAVE',
 
   // ── Countdown ────────────────────────────────────────────────────────────────
   COUNTDOWN_SCREAM:          'BËRTIT!',
 
   // ── While waiting for scream to start ────────────────────────────────────────
-  SCANNING:                  'Po analizohen pikat e tejkalimit',
+  SCANNING:                  'PO ANALIZOHEN PIKAT E TEJKALIMIT',
 
   // ── Score / results ──────────────────────────────────────────────────────────
   LABEL_SCORE:               'Rezultati',
@@ -43,17 +43,17 @@ export const S = {
   LABEL_PEAK:                'Kulmi i zërit:',
   LABEL_TIME:                'Kohëzgjatja e britmës:',
   LABEL_RANK:                'Renditja globale:',
-  LABEL_RANK_SUFFIX:         '. vend',
+  LABEL_RANK_SUFFIX:         '. vendi',
   UNIT_DB:                   'db',
   UNIT_SECONDS:              's',
   SCREAM_LOADING:            'Britma jote ishte në 1% më të mirat',
 
   // ── QR / download section ────────────────────────────────────────────────────
   QR_HEADING:                'Shkarko rezultatin tënd',
-  QR_CTA:                    'Skano për ta shkarkuar',
+  QR_CTA:                    'SKANO PËR TA SHKARKUAR',
 
   // ── Reset button ─────────────────────────────────────────────────────────────
-  BTN_RESET:                 'Rivendos',
+  BTN_RESET:                 'RIVENDOS',
 
   // ── JotForm screen ───────────────────────────────────────────────────────────
   JOTFORM_TITLE:             'Dërgo',

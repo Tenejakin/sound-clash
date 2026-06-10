@@ -33,12 +33,20 @@ const pool = new Pool({
 pool.connect()
     .then(async client => {
         console.log('[DB] Connected to PostgreSQL successfully');
-        await client.query(`
-            ALTER TABLE scream_sessions
-                ADD COLUMN IF NOT EXISTS download_token VARCHAR(64) UNIQUE,
-                ADD COLUMN IF NOT EXISTS token_expires_at TIMESTAMPTZ
-        `);
-        console.log('[DB] Schema up to date');
+        // Best-effort schema sync. Requires table ownership; if the DB user
+        // isn't the owner this throws "must be owner of table". The columns
+        // already exist in the deployed schema, so a failure here is harmless
+        // and must NOT take the server down.
+        try {
+            await client.query(`
+                ALTER TABLE scream_sessions
+                    ADD COLUMN IF NOT EXISTS download_token VARCHAR(64) UNIQUE,
+                    ADD COLUMN IF NOT EXISTS token_expires_at TIMESTAMPTZ
+            `);
+            console.log('[DB] Schema up to date');
+        } catch (err: any) {
+            console.warn(`[DB] Skipping schema sync (${err.message}) — assuming columns already exist`);
+        }
         client.release();
     })
     .catch(err => {
