@@ -18,7 +18,7 @@ const SCORE_MULTIPLIER = Number(import.meta.env.VITE_SCORE_MULTIPLIER) || 1;
 
 const BACKGROUND_URL = import.meta.env.VITE_BACKGROUND_URL || '/r2/app_bg_final.png';
 const LOGO_URL = import.meta.env.VITE_LOGO_URL || '/r2/Logo.png';
-const JOTFORM_BASE_URL = import.meta.env.VITE_JOTFORM_URL || 'https://redbull.jotform.com/261021301301027';
+const JOTFORM_BASE_URL = import.meta.env.VITE_JOTFORM_URL || 'https://redbull.jotform.com/261581437332052';
 
 // Pi LED API (Flask). Forced to http:// because led_api.py is plain HTTP.
 // Defaults to the same hostname the app is served from, on port 5000.
@@ -879,7 +879,7 @@ const App: React.FC = () => {
                   {isRunComplete && showJotForm && runSummary && (
                     <div className="relative isolate z-30 flex flex-col w-full flex-1 gap-4 animate-in fade-in duration-500 min-h-0 pointer-events-auto">
                       <iframe
-                        src={`${JOTFORM_BASE_URL}?team_selection=${encodeURIComponent(selectedTeam ?? '')}&loudness_level=${encodeURIComponent(String(runSummary.score))}`}
+                        src={`${JOTFORM_BASE_URL}?q14_Team_Selection=${encodeURIComponent(selectedTeam ?? '')}&q12_Scream_score=${encodeURIComponent(String(runSummary.score))}`}
                         className="w-full flex-1 rounded-2xl border border-white/20 min-h-0 pointer-events-auto"
                         style={{ minHeight: '70vh', touchAction: 'auto' }}
                         frameBorder="0"
